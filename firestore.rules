@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signed() { return request.auth != null; }
+    function me() { return request.auth.uid; }
+    function member(chatId) { return signed() && me() in get(/databases/$(database)/documents/chats/$(chatId)).data.members; }
+    function validHandle(h) { return h.matches('^[a-z0-9_]{3,20}$'); }
+    match /usernames/{handle} {
+      allow get: if signed();
+      allow list: if false;
+      allow create: if signed() && validHandle(handle) && request.resource.data.keys().hasOnly(['uid']) && request.resource.data.uid == me() && !exists(/databases/$(database)/documents/usernames/$(handle));
+      allow update, delete: if false;
+    }
+    match /users/{uid} {
+      allow get: if signed();
+      allow list: if false;
+      allow create: if signed() && uid == me() && request.resource.data.keys().hasOnly(['uid','name','username','email','createdAt']) && request.resource.data.uid == uid && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 80 && request.resource.data.username is string && validHandle(request.resource.data.username) && getAfter(/databases/$(database)/documents/usernames/$(request.resource.data.username)).data.uid == uid && request.resource.data.email == (request.auth.token.email == null ? '' : request.auth.token.email);
+      allow update: if signed() && uid == me() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name']) && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 80;
+      allow delete: if false;
+    }
+    match /chats/{chatId} {
+      allow get, list: if signed() && me() in resource.data.members;
+      allow create: if signed()
+        && request.resource.data.keys().hasOnly(['members','membersInfo','createdAt','updatedAt','lastMessage'])
+        && request.resource.data.members is list && request.resource.data.members.size() == 2
+        && request.resource.data.members[0] < request.resource.data.members[1]
+        && me() in request.resource.data.members
+        && chatId == request.resource.data.members[0] + '_' + request.resource.data.members[1]
+        && request.resource.data.membersInfo.keys().hasOnly(request.resource.data.members)
+        && request.resource.data.lastMessage == '';
+      allow update: if signed() && me() in resource.data.members
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastMessage','updatedAt'])
+        && request.resource.data.members == resource.data.members
+        && request.resource.data.lastMessage is string && request.resource.data.lastMessage.size() <= 5000;
+      allow delete: if false;
+      match /messages/{messageId} {
+        allow get, list: if member(chatId);
+        allow create: if member(chatId) && request.resource.data.keys().hasOnly(['senderId','text','createdAt'])
+          && request.resource.data.senderId == me() && request.resource.data.text is string
+          && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 5000;
+        allow update, delete: if false;
+      }
+    }
+  }
+}
