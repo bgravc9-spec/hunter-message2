@@ -1,6 +1,28 @@
 {
- "name":"hunter-message","private":true,"version":"0.1.0","type":"module",
- "scripts":{"dev":"vite --host 0.0.0.0","build":"tsc -b && vite build","preview":"vite preview --host 0.0.0.0","android:init":"npm run build && npx cap add android","android:sync":"npm run build && npx cap sync android"},
- "dependencies":{"@capacitor/android":"^7.4.0","@capacitor/core":"^7.4.0","firebase":"^12.4.0","lucide-react":"^0.468.0","react":"^19.1.1","react-dom":"^19.1.1"},
- "devDependencies":{"@capacitor/cli":"^7.4.0","@types/react":"^19.1.0","@types/react-dom":"^19.1.0","typescript":"^5.9.3","vite":"^7.1.9"}
+  "name": "hunter-message",
+  "private": true,
+  "version": "0.4.2",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "android:init": "npm run build && npx cap add android",
+    "android:sync": "npm run build && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.0",
+    "@capacitor/core": "^7.4.0",
+    "firebase": "^12.4.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9"
+  }
 }
