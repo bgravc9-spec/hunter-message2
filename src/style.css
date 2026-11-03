@@ -282,3 +282,27 @@ html[data-theme=light] .hm-group-sender{color:#176db8}
 @media(max-width:720px){.hm-profile-modal{max-height:92dvh}.hm-member-row{gap:7px}.hm-member-remove{padding:7px}}
 
 .hm-group-sender-me{color:#c1edff;text-align:right}
+
+/* HUNTER MESSAGE V4.3 – short voice messages */
+.hm-voice-recorder{display:grid;place-items:center;flex:0 0 34px;position:static}
+.hm-voice-recorder>.compose-icon{height:36px;width:34px;flex:0 0 34px}
+.hm-voice-float{position:absolute;z-index:12;bottom:calc(100% + 4px);left:12px;right:12px;background:#1b314d;border:1px solid #406186;box-shadow:0 -8px 32px #0006;border-radius:16px;padding:12px 14px;color:#eef7ff;max-width:520px;margin:auto}
+.hm-voice-status{display:flex;align-items:center;gap:9px;margin-bottom:12px;font-size:13px}
+.hm-voice-duration{margin-left:auto;color:#b3c9e5;font-variant-numeric:tabular-nums;font-size:12px}
+.hm-record-dot{width:11px;height:11px;border-radius:50%;background:#ff4f65;box-shadow:0 0 0 4px #ff4f6530;animation:hm-voice-pulse 1.2s infinite}
+.hm-record-done{width:11px;height:11px;border-radius:50%;background:#55e0ad}
+@keyframes hm-voice-pulse{50%{box-shadow:0 0 0 8px #ff4f650a}}
+.hm-voice-buttons{display:flex;justify-content:flex-end;gap:8px}
+.hm-voice-buttons button{display:flex;justify-content:center;align-items:center;gap:6px;border:1px solid #47637f;background:#273b56;color:#e9f1ff;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:650}
+.hm-voice-buttons button.hm-voice-main{background:#177bd1;border-color:#177bd1;color:#fff}
+.hm-voice-preview{width:100%;height:42px;margin:0 0 10px}
+.hm-voice-error{font-size:12px;color:#ffb5bd;margin-top:8px}
+.hm-voice-error-mini{font-size:10px;color:#ff9bad}
+.hm-voice-message{max-width:min(260px,70vw);padding:4px 0}
+.hm-voice-label{display:block;color:inherit;opacity:.82;font-size:12px;font-weight:700;margin:0 0 7px}
+.hm-voice-message audio{display:block;width:100%;min-width:200px;height:42px;max-width:100%}
+html[data-theme=light] .hm-voice-float{background:#f8fbff;border-color:#ccdcec;color:#253b58;box-shadow:0 -8px 32px #122c4525}
+html[data-theme=light] .hm-voice-duration{color:#58738e}
+html[data-theme=light] .hm-voice-buttons button{background:#e5f0fa;color:#224663;border-color:#cbdff1}
+html[data-theme=light] .hm-voice-buttons button.hm-voice-main{background:#0876d4;border-color:#0876d4;color:#fff}
+@media(max-width:390px){.hm-voice-float{left:5px;right:5px}.hm-voice-status{gap:6px;font-size:12px}.hm-voice-buttons button{padding:8px 10px}}
