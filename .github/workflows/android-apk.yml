@@ -1,8 +1,6 @@
 name: HUNTER MESSAGE Android APK
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -47,6 +45,25 @@ jobs:
           npm run build
           if [ ! -d android ]; then npx cap add android; fi
           npx cap sync android
+      - name: Enable Android microphone permission
+        shell: bash
+        run: |
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          manifest = Path('android/app/src/main/AndroidManifest.xml')
+          source = manifest.read_text()
+          permissions = [
+              '<uses-permission android:name="android.permission.RECORD_AUDIO" />',
+              '<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />',
+          ]
+          if '<application' not in source:
+              raise SystemExit('AndroidManifest.xml application tag not found')
+          for permission in permissions:
+              if permission not in source:
+                  source = source.replace('<application', permission + '\n    <application', 1)
+          manifest.write_text(source)
+          print('Android voice permissions present')
+          PYCODE
       - name: Build debug APK
         working-directory: android
         run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon --stacktrace
