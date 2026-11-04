@@ -306,3 +306,29 @@ html[data-theme=light] .hm-voice-duration{color:#58738e}
 html[data-theme=light] .hm-voice-buttons button{background:#e5f0fa;color:#224663;border-color:#cbdff1}
 html[data-theme=light] .hm-voice-buttons button.hm-voice-main{background:#0876d4;border-color:#0876d4;color:#fff}
 @media(max-width:390px){.hm-voice-float{left:5px;right:5px}.hm-voice-status{gap:6px;font-size:12px}.hm-voice-buttons button{padding:8px 10px}}
+
+/* HUNTER MESSAGE V4.4 - account, invitations, media, calling */
+.v44-archive-toggle,.v44-loadmore{border:1px solid var(--border);border-radius:10px;background:var(--pale);color:var(--blue);padding:8px 11px;font-size:12px;font-weight:700;margin:0 7px}
+.v44-loadmore{display:block;align-self:center;margin:3px auto 14px;padding:8px 17px}
+.v44-loadmore:disabled{opacity:.48}
+.v44-invites{border:1px solid var(--border);border-radius:12px;background:var(--panel);padding:12px;margin:14px 0;font-size:13px}
+.v44-invites>div{display:flex;align-items:center;gap:6px;margin-top:11px;flex-wrap:wrap}
+.v44-invites>div span{flex:1;min-width:75px}
+.v44-invites button,.v44-group-actions button{padding:8px 10px;border:1px solid var(--border);border-radius:9px;background:var(--pale);color:var(--blue)}
+.v44-pinned{align-self:stretch;font-size:12px;padding:8px 14px;border:1px solid var(--border);border-radius:10px;background:var(--pale);color:var(--text)}
+.v44-forward-modal{width:min(420px,92vw);max-height:76dvh;overflow:auto;border-radius:18px;padding:20px;background:var(--panel);color:var(--text);box-shadow:0 15px 50px #0005}
+.v44-forward-modal p{font-size:13px;color:var(--sub);margin:10px 0;overflow-wrap:anywhere}
+.v44-forward-modal button{display:flex;align-items:center;gap:9px;padding:13px;width:100%;border-bottom:1px solid var(--border);text-align:left}
+.v44-group-actions{display:flex;flex-direction:column;gap:7px;padding:15px}
+.v44-group-actions button{display:flex;align-items:center;gap:9px;min-height:40px;text-align:left}
+.v44-file-link,.v44-file-error,.v44-file-loading{display:block;color:var(--text);padding:12px;max-width:280px;overflow-wrap:anywhere}
+.v44-video{display:block;width:100%;max-width:300px;max-height:250px;border-radius:12px;background:#000}
+.v44-call-buttons{display:flex;align-items:center;gap:3px}
+.v44-call-buttons button{width:35px;height:37px;display:grid;place-items:center;border-radius:10px;background:#203753;color:#e9f3ff}
+.v44-call-overlay{position:fixed;inset:0;background:#050b16bf;display:flex;align-items:center;justify-content:center;z-index:3000;padding:16px}
+.v44-call-card{display:flex;flex-direction:column;align-items:stretch;gap:12px;text-align:center;width:min(440px,98%);max-height:96dvh;overflow:auto;padding:20px;border-radius:18px;background:#172941;color:#fff;box-shadow:0 15px 60px #0008}
+.v44-call-card strong{font-size:20px}.v44-call-card small{font-size:12px;color:#bacce0}
+.v44-call-video{max-height:45dvh;min-height:80px;background:#060d19;width:100%;border-radius:13px}
+.v44-self-video{height:95px;max-width:135px;align-self:end;border-radius:10px;background:#080f1a}
+.v44-hangup{display:flex;align-items:center;justify-content:center;gap:7px;background:#d73655;padding:13px 18px;border-radius:11px;color:#fff;font-weight:700}
+@media(max-width:420px){.v44-call-buttons button{width:28px}.v44-archive-toggle{padding:6px;font-size:11px}.v44-invites{padding:9px}}
