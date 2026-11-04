@@ -1,0 +1,13 @@
+rules_version = '2';
+service firebase.storage {
+ match /b/{bucket}/o {
+   match /chats/{chatId}/{uid}/{filename} {
+     function signed(){return request.auth != null;}
+     function member(){return signed() && firestore.exists(/databases/(default)/documents/chats/$(chatId)) && request.auth.uid in firestore.get(/databases/(default)/documents/chats/$(chatId)).data.members;}
+     allow read: if member();
+     allow write: if member() && request.auth.uid==uid
+       && request.resource.size <= 20000000
+       && request.resource.contentType.matches('^(image/(jpeg|png|webp)|video/(mp4|webm)|application/pdf|text/plain)$');
+   }
+ }
+}
